@@ -1,0 +1,23 @@
+from django.test import Client, TestCase
+from django.urls import reverse
+from . import views
+# Create your tests here.
+from usersApp.models import CustomUser
+
+
+class HomeAppViewTestCase(TestCase):
+    def init_client(self):
+        self.client = Client()
+
+    def setUp(self):
+        self.user_1 = CustomUser.objects.create_user('test@email.com', 'temp1234')
+        self.user_1.role = 1
+
+    def tearDown(self):
+        self.user_1.delete()
+
+    def test_home_get(self):
+        self.client.login(email='test@email.com', password='temp1234')
+        response = self.client.get(reverse('home'))
+        # print(response.status_code)
+        self.assertEqual(response.status_code, 200)
