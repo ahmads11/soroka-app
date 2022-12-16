@@ -1,0 +1,18 @@
+@is_user
+def mail(request):
+    rp = request.POST.get
+    print(rp,"work_schedule")
+    response_data ={}
+    if request.POST:
+        if rp('type') == "add":
+            m = Mail.objects.create(reciever=WebsiteUser.objects.get(id=rp('user')),sender=WebsiteUser.objects.get(id=request.session["id"]),message=rp('message'))
+        if rp('type') == "delete":
+            m = Mail.objects.get(id=rp("id")).delete()
+        response_data['status'] = "success"
+        return HttpResponse(json.dumps(response_data,cls=DjangoJSONEncoder), content_type='application/json')
+
+    c = {
+        "mail":Mail.objects.filter(reciever__id=request.session["id"]),
+        "user":WebsiteUser.objects.all(),
+    }
+    return render(request,'common/mail.html',c)
