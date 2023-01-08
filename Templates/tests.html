@@ -1,0 +1,63 @@
+{%  extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+{% block title %}
+Settings
+{% endblock title %}
+
+
+{% block navbar %}
+
+{%  include 'navbar.html' %}
+
+{% endblock navbar %}
+
+{% block content %}
+
+
+ <h2 class="justify-content-center d-flex mt-3 mb-3" style="color:blue;  text-decoration: overline underline;">Tests List</h2>
+
+
+        <table class="table">
+  <thead class="thead-dark">
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Name</th>
+                <th scope="col">Test type</th>
+
+              <th scope="col">Test date</th>
+
+      <th scope="col">Result</th>
+
+
+    </tr>
+  </thead>
+  <tbody>
+  {% for test in object_list %}
+            {% csrf_token %}
+
+    <tr>
+      <th scope="row">{{ test.id }}</th>
+        {% if test.usertest.first_name is not null %}
+      <td>{{ test.usertest.username }}</td>
+        {% else %}
+        <td>{{ test.usertest.first_name }}</td>
+
+        {% endif %}
+        <td>{{test.name}}</td>
+      <td>{{test.test_date}}</td>
+        {% if test.theresult == None or test.theresult == False %}
+            <td style="color:blue;"> Not infected </td>
+        {% elif test.theresult == True %}
+        <td style="color:red;"> Infected </td>
+        {% endif %}
+
+
+
+    </tr>
+        {% endfor %}
+  </tbody>
+</table>
+
+
+{% endblock content %}

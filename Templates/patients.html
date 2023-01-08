@@ -1,0 +1,58 @@
+{%  extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+{% block title %}
+Settings
+{% endblock title %}
+
+
+{% block navbar %}
+
+{%  include 'navbar.html' %}
+
+{% endblock navbar %}
+
+{% block content %}
+
+
+ <h2 class="justify-content-center d-flex mt-3 mb-3" style="color:blue;  text-decoration: overline underline;">Patients List</h2>
+
+
+
+
+
+        <table class="table">
+  <thead class="thead-dark">
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">First</th>
+      <th scope="col">Last</th>
+        <th scope="col">Email</th>
+      <th scope="col">Status</th>
+    </tr>
+  </thead>
+  <tbody>
+  {% for patient in object_list %}
+            {% csrf_token %}
+
+        {% if patient.role == 3 %}
+    <tr>
+      <th scope="row">{{ patient.id }}</th>
+      <td>{{ patient.first_name }}</td>
+      <td>{{ patient.last_name }}</td>
+        <td>{{ patient.email }}</td>
+
+        {% if  patient.theresult == None or  patient.theresult == False %}
+      <td style="color:blue;">Not infected</td>
+        {% elif patient.theresult == True %}
+              <td style="color:red;"> Infected</td>
+          {% endif %}
+    </tr>
+  {% endif %}
+
+        {% endfor %}
+  </tbody>
+</table>
+
+
+{% endblock content %}

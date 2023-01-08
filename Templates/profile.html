@@ -1,0 +1,71 @@
+{%  extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+{% block title %}
+My Profile
+{% endblock title %}
+
+
+{% block navbar %}
+
+
+{%  include 'navbar.html' %}
+
+{% endblock navbar %}
+
+{% block content %}
+
+<div class="row" style="margin-top:2.5%;">
+
+    <div class="col-md-3" style="margin-left:-6%; text-align: center;">
+        <div class="card card-body" style="border-radius:25px;">
+           {% if request.user.role == 2 %}
+            <img class="img-fluid img-thumbnail"  src="https://post.healthline.com/wp-content/uploads/2020/08/Doctors_For_Men-732x549-thumbnail-1.jpg" >
+             {% elif request.user.role == 3 %}
+            <img class="img-fluid img-thumbnail"  src="https://thumbs.dreamstime.com/z/cartoon-smiling-doctor-nurse-illustration-139041592.jpg" >
+
+            {% elif request.user.role == 1 %}
+            <img class="img-fluid img-thumbnail"  src="https://t4.ftcdn.net/jpg/04/75/00/99/360_F_475009987_zwsk4c77x3cTpcI3W1C1LU4pOSyPKaqi.jpg" >
+
+            {% endif %}
+            <h3>Hi, {{request.user.first_name}} {{request.user.last_name}}</h3>
+            <a href="{% url 'account-settings' %}"> <h6>Account Settings</h6> </a>
+        </div>
+    </div>
+
+    {% if request.user.role == 2 or request.user.role == 1  %}
+  <div class="col-md-8 ml-5" >
+        <div class="card card-body text-center"style="border-radius:25px; min-height:10%;">
+            <a href="{% url 'add-patient' %}" style="margin-left: 2%;"> <h4> <i class="fa fa-bed fa-sm"></i> New Patient</h4> </a>
+
+
+        </div>
+        <br>
+      <div class="card card-body text-center"style="border-radius:25px; min-height:10%;">
+            <a href="{% url 'add-test' %}" style="margin-left: 2%;"> <h4> <i class="fa fa-stethoscope fa-sm"></i> New Test</h4> </a>
+
+
+        </div>
+        <br>
+       {% if request.user.role == 1  %}
+            <div class="card card-body text-center"style="border-radius:25px; min-height:10%;">
+            <a href="{% url 'add-doctor' %}" style="margin-left: 2%;"> <h4> <i class="fa fa-user-md fa-sm"></i> New Doctor</h4> </a>
+            </div>
+      {% endif %}
+
+<br>
+
+      <div class="card card-body text-center"style="border-radius:25px; min-height:10%;">
+            <a href="#" style="margin-left: 2%;"> <h4> <i class="fa  fa-envelope fa-sm"></i> New Email</h4> </a>
+
+
+        </div>
+    </div>
+
+    {% endif %}
+
+
+                <img class="img-thumbnail mt-2"  style="width:1300px; height:320px" src="https://img.freepik.com/free-vector/heart-with-cardiograph-line-medical-blue-background_1017-24816.jpg?w=2000" >
+                </div>
+
+{% endblock content %}
