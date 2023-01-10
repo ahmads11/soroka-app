@@ -1,0 +1,52 @@
+{%  extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+{% block title %}
+Settings
+{% endblock title %}
+
+
+{% block navbar %}
+
+{%  include 'navbar.html' %}
+
+{% endblock navbar %}
+
+{% block content %}
+
+
+ <h2 class="justify-content-center d-flex mt-3 mb-3" style="color:blue;  text-decoration: overline underline;">Doctors List</h2>
+
+
+
+
+
+        <table class="table">
+  <thead class="thead-dark">
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">First</th>
+      <th scope="col">Last</th>
+        <th scope="col">Email</th>
+    </tr>
+  </thead>
+  <tbody>
+  {% for doctor in object_list %}
+            {% csrf_token %}
+
+        {% if doctor.role == 2 %}
+    <tr>
+      <th scope="row">{{ doctor.id }}</th>
+      <td>{{ doctor.first_name }}</td>
+      <td>{{ doctor.last_name }}</td>
+        <td>{{ doctor.email }}</td>
+
+
+    </tr>
+  {% endif %}
+        {% endfor %}
+  </tbody>
+</table>
+
+
+{% endblock content %}
