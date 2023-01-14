@@ -1,0 +1,55 @@
+{%  extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+{% block title %}
+Settings
+{% endblock title %}
+
+
+{% block navbar %}
+
+{%  include 'navbar.html' %}
+
+{% endblock navbar %}
+
+{% block content %}
+
+
+<h2 class="justify-content-center d-flex text-center mt-4">Contact Us </h2>
+
+<form action="">
+  <div class="form-group">
+    <label for="email-input">Email address</label>
+    <input type="email" class="form-control" id="email-input" placeholder="name@example.com">
+  </div>
+    <div class="form-group">
+    <label for="fname-input">First Name</label>
+        <input type="text" class="form-control" id="fname-input" placeholder="first name">
+            <label for="lname-input">Last Name</label>
+                <input type="text" class="form-control" id="lname-input" placeholder="last name">
+
+  </div>
+
+  <div class="form-group">
+    <label for="selectobject">Select Subject</label>
+    <select class="form-control" id="selectobject">
+      <option>Technical problem</option>
+      <option>Test results</option>
+      <option>Password Problem</option>
+    </select>
+  </div>
+
+  <div class="form-group">
+    <label for="exampleFormControlTextarea1">Message</label>
+    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+  </div>
+
+    <div class="form-group" style="">
+
+                  <button type="submit" class="btn btn-light"><a class="nav-link" href="{% url 'profile' %}">Contact Us</a></button>
+
+
+    </div>
+</form>
+
+{% endblock content %}
